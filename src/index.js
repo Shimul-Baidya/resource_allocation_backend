@@ -1,14 +1,14 @@
 const express = require('express');
-require('dotenv').config();
-const app = express(); 
-const port = process.env.PORT || 3000;
+const app = express();
 
+const { syncDatabase } = require('./models');
 
-// Middleware to parse incoming JSON requests
-app.use(express.json())
+app.use(express.json());
+
+syncDatabase();
 
 app.get('/', (req, res) => {
-    res.send('API is running!');
+  res.json({ message: 'API is running' });
 });
 
 app.get('/health', (req, res) => {
@@ -18,7 +18,6 @@ app.get('/health', (req, res) => {
     });
 });
 
-
-app.listen(port, () =>{
-    console.log(`Server running at http://localhost:${port}`);
+app.listen(3000, () => {
+  console.log('Server running on port 3000');
 });
