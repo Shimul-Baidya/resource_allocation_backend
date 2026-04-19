@@ -1,10 +1,17 @@
 const express = require('express');
 const app = express();
-
+const cors = require('cors');  // Add this
 const { syncDatabase } = require('./models');  // why did we do it?
 
 const resourceRoutes = require('./routes/resourceRoutes');
 const bookingRoutes = require('./routes/bookingRoutes');
+
+// Enable CORS for your frontend
+app.use(cors({
+  origin: 'http://localhost:5173',
+  credentials: true
+}));
+
 
 app.use(express.json());
 
